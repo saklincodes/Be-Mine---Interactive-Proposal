@@ -21,8 +21,13 @@ function handleNoClick() {
     messageIndex = (messageIndex + 1) % messages.length;
     
     const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-    yesButton.style.fontSize = `${currentSize * 1.35}px`;
-    yesButton.style.padding = `${Math.min(currentSize * 0.8, 40)}px ${Math.min(currentSize * 1.5, 70)}px`;
+    // Smoothly grow yes button with a maximum cap so desktop layout stays clean
+    const newSize = Math.min(currentSize * 1.22, 44);
+    yesButton.style.fontSize = `${newSize}px`;
+    
+    const py = Math.min(newSize * 0.55, 20);
+    const px = Math.min(newSize * 1.15, 42);
+    yesButton.style.padding = `${py}px ${px}px`;
     
     noButton.classList.add('shake-anim');
     setTimeout(() => noButton.classList.remove('shake-anim'), 400);
