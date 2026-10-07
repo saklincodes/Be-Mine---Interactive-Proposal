@@ -2,6 +2,8 @@
 
 > A cute, interactive web app to ask your crush or special someone out on a date! Features playful dynamic buttons, glassmorphism design, floating animations, and an adorable celebration screen. ✨
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://be-mine-proposal-flame.vercel.app)
+
 ---
 
 ## 🌟 What is this?
