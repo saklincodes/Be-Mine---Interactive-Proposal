@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay! Date Accepted! 💖✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./yes_style.css">
+    <!-- Created with ❤️ by You -->
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="spooky-bg">
+        <span class="float-emoji" style="--i:1; --left:15%;">✨</span>
+        <span class="float-emoji" style="--i:2.5; --left:35%;">💖</span>
+        <span class="float-emoji" style="--i:1.8; --left:60%;">🎉</span>
+        <span class="float-emoji" style="--i:3; --left:80%;">⭐</span>
+    </div>
+
+    <div class="container glass-card">
+        <div class="celebrate-badge">🎉 It's a Date! 🎉</div>
+        <h1 class="header_text">Knew you would say YES! 💖✨</h1>
+        <p class="sub_text">Get ready for cozy movies, delicious treats & sweet date memories! ☕🍿✨</p>
+        
+        <div class="gif_container">
+            <img src="yes_hug.gif" alt="Cute Hugging Bears Celebration">
+        </div>
+
+        <div class="action-box">
+            <a href="index.html" class="back-btn"> Ask again? ✨</a>
+        </div>
+    </div>
+
+    <!-- High-Performance Smooth Confetti Script -->
+    <script>
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const emojis = ['✨', '💖', '🎉', '🍬', '⭐', '🎈'];
+        const particles = [];
+
+        for (let i = 0; i < 30; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height - height,
+                text: emojis[Math.floor(Math.random() * emojis.length)],
+                size: Math.floor(Math.random() * 14 + 20),
+                speedY: Math.random() * 2.2 + 1.2,
+                speedX: Math.random() * 1.4 - 0.7,
+                rotation: Math.random() * 360,
+                rotSpeed: Math.random() * 2 - 1
+            });
+        }
+
+        let lastTime = performance.now();
+        function animate(now) {
+            const dt = Math.min((now - lastTime) / 16.67, 2);
+            lastTime = now;
+
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.font = p.size + 'px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(p.text, 0, 0);
+                ctx.restore();
+
+                p.y += p.speedY * dt;
+                p.x += p.speedX * dt;
+                p.rotation += p.rotSpeed * dt;
+
+                if (p.y > height + 40) {
+                    p.y = -40;
+                    p.x = Math.random() * width;
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }, 100);
+        });
+    </script>
+</body>
+</html>
